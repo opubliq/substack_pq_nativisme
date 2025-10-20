@@ -281,7 +281,7 @@ TSWLatexianTemp*
 ## Editors:
 # WinEdt
 *.bak
-*.sav
+#*.sav
 
 # latexindent.pl
 *.bak[0-9]*
