@@ -277,7 +277,7 @@ def download_specific_files(url: str, download_dir: str, files_to_download: list
 
 def convert_doc_to_markdown(doc_path: Path, output_dir: Path = None):
     """
-    Convertit un fichier .doc en .md en utilisant antiword.
+    Convertit un fichier .doc en .md en utilisant catdoc.
     Le fichier .doc original est conservé.
 
     Args:
@@ -295,46 +295,53 @@ def convert_doc_to_markdown(doc_path: Path, output_dir: Path = None):
         output_dir = doc_path.parent
 
     print(f"\nConversion de {doc_path.name} en markdown...")
-    print("  Utilisation de antiword pour extraire le texte...")
 
     md_path = output_dir / (doc_path.stem + '.md')
 
-    try:
-        # Utiliser antiword pour extraire le texte du .doc
-        result = subprocess.run(
-            [
-                'antiword',
-                str(doc_path)
-            ],
-            capture_output=True,
-            text=True,
-            timeout=30
-        )
+    # Essayer d'abord catdoc, puis antiword en fallback
+    tools = [
+        ('catdoc', ['catdoc', '-w', str(doc_path)], 'catdoc'),
+        ('antiword', ['antiword', str(doc_path)], 'antiword')
+    ]
 
-        if result.returncode == 0:
-            # Écrire le texte dans un fichier markdown
-            with open(md_path, 'w', encoding='utf-8') as f:
-                f.write(result.stdout)
+    for tool_name, cmd, package in tools:
+        try:
+            print(f"  Tentative avec {tool_name}...")
+            result = subprocess.run(
+                cmd,
+                capture_output=True,
+                text=True,
+                timeout=30
+            )
 
-            print(f"✓ Conversion markdown réussie: {md_path.name}")
-            print(f"  ℹ Fichier .doc original conservé: {doc_path.name}")
+            if result.returncode == 0:
+                # Écrire le texte dans un fichier markdown
+                with open(md_path, 'w', encoding='utf-8') as f:
+                    f.write(result.stdout)
 
-            return md_path
-        else:
-            print(f"✗ Erreur lors de la conversion:")
-            print(f"  stderr: {result.stderr}")
-            return None
+                print(f"✓ Conversion markdown réussie avec {tool_name}: {md_path.name}")
+                print(f"  ℹ Fichier .doc original conservé: {doc_path.name}")
 
-    except FileNotFoundError:
-        print("✗ antiword n'est pas installé ou n'est pas dans le PATH")
-        print("  Installez antiword: sudo apt-get install antiword")
-        return None
-    except subprocess.TimeoutExpired:
-        print("✗ Timeout lors de la conversion (>30s)")
-        return None
-    except Exception as e:
-        print(f"✗ Erreur lors de la conversion: {str(e)}")
-        return None
+                return md_path
+            else:
+                print(f"  ✗ {tool_name} a échoué: {result.stderr}")
+                continue
+
+        except FileNotFoundError:
+            print(f"  ℹ {tool_name} n'est pas installé")
+            continue
+        except subprocess.TimeoutExpired:
+            print(f"  ✗ Timeout avec {tool_name} (>30s)")
+            continue
+        except Exception as e:
+            print(f"  ✗ Erreur avec {tool_name}: {str(e)}")
+            continue
+
+    # Si aucun outil n'a fonctionné
+    print("✗ Impossible de convertir le fichier .doc")
+    print("  Installez catdoc: sudo apt-get install catdoc")
+    print("  ou antiword: sudo apt-get install antiword")
+    return None
 
 
 def main():
