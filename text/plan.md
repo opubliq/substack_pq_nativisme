@@ -29,3 +29,8 @@ Clivage diversité (immigration, laicité, etc) (Bélanger & Godbout, 2022 ; Bé
 Position des partis selon leurs sorties médiatiques? Faire quelque chose du style boussole électorale?
 
 
+https://leger360.com/fr/intentions-de-vote-provinciales-septembre-2025/
+
+https://link.springer.com/article/10.1057/s41253-024-00274-z
+
+https://leger360.com/fr/perceptions-en-matiere-dimmigration-au-quebec-et-au-canada/

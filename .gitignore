@@ -1,3 +1,7 @@
+data/raw/pes_elxn_2022/
+data/raw/sondage_nationalisme_2022/
+data/clean/
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
