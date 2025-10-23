@@ -34,3 +34,11 @@ https://leger360.com/fr/intentions-de-vote-provinciales-septembre-2025/
 https://link.springer.com/article/10.1057/s41253-024-00274-z
 
 https://leger360.com/fr/perceptions-en-matiere-dimmigration-au-quebec-et-au-canada/
+
+2015 Canadian Election Study (CES) data
+
+Mudde (2007) highlights nativism as being a key feature of the populist right, an ideology in which non-native persons and ideas are seen as threatening the ‘nation’. Nativism is clearly linked with anti-immigration, anti-diversity, assimilationist tendencies.
+
+Turning to nativism, the results demonstrate that it has a significant (at p < 0.05) and positive impact on support for independence. (Blanchet et Medeiros, 2019)
+As for nativism, it does not exert a significant effect on the QS and CAQ vote, but it does positively and statistically impact the voting for the PQ, having strong nativist attitudes makes Quebeckers more likely to vote for the PQ (Blanchet et Medeiros, 2019)
+
