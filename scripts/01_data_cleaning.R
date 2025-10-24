@@ -22,6 +22,9 @@ library(tidyr)
 library(stringr)
 library(readr)
 
+# Create output directory if it doesn't exist
+dir.create("data/clean", showWarnings = FALSE, recursive = TRUE)
+
 # LOAD DATA ----
 cat("Loading raw data...\n")
 belanger2018_raw <- read_dta("data/raw/belanger2018_data.dta")
